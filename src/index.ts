@@ -1,5 +1,3 @@
-// TODO alt function with input  circumCircleRadius instead of sideLength
-
 // It's weird to create two types that are identical but have different names
 type PolarPoint = [number, number]
 type CartesianPoint = [number, number]
