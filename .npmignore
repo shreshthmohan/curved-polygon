@@ -6,3 +6,7 @@ coverage/
 node_modules/
 rollup/
 test/
+
+.eslintignore
+.eslintrc
+.prettierrc.json
