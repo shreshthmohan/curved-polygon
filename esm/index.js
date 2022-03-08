@@ -1,4 +1,3 @@
-// TODO alt function with input  circumCircleRadius instead of sideLength
 var PI = Math.PI;
 // returns the d attribute used for SVG <path> element
 export function roundedPolygonBySideLength(_a) {
@@ -40,14 +39,14 @@ function pointsToDForPath(_a) {
     // L draw straight line to point
     if (!allPoints.length)
         return '';
-    return "M ".concat(allPoints[0].join(' '), "\n    ").concat(allPoints
+    return "M ".concat(allPoints[0].join(' '), " ").concat(allPoints
         .slice(1)
         .map(function (p, i) {
         return i % 2 === 0
             ? "A ".concat(borderRadius, " ").concat(borderRadius, " ").concat(alpha, " 0 0 ").concat(p.join(' '))
             : "L ".concat(p.join(' '));
     })
-        .join(' '), "\n    z\n    ");
+        .join(' '), " z");
 }
 function getAllPointsOnCurvedPolygon(_a) {
     var sideCount = _a.sideCount, radiusOfInnerPolygon = _a.radiusOfInnerPolygon, borderRadius = _a.borderRadius, alpha = _a.alpha, _b = _a.cx, cx = _b === void 0 ? 0 : _b, _c = _a.cy, cy = _c === void 0 ? 0 : _c;

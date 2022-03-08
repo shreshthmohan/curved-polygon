@@ -1,7 +1,6 @@
-self.curvedPolygons = (function (exports) {
+self.curvedPolygon = (function (exports) {
     'use strict';
 
-    // TODO alt function with input  circumCircleRadius instead of sideLength
     var PI = Math.PI; // returns the d attribute used for SVG <path> element
 
     function roundedPolygonBySideLength(_a) {
@@ -75,9 +74,9 @@ self.curvedPolygons = (function (exports) {
       // L draw straight line to point
 
       if (!allPoints.length) return '';
-      return "M ".concat(allPoints[0].join(' '), "\n    ").concat(allPoints.slice(1).map(function (p, i) {
+      return "M ".concat(allPoints[0].join(' '), " ").concat(allPoints.slice(1).map(function (p, i) {
         return i % 2 === 0 ? "A ".concat(borderRadius, " ").concat(borderRadius, " ").concat(alpha, " 0 0 ").concat(p.join(' ')) : "L ".concat(p.join(' '));
-      }).join(' '), "\n    z\n    ");
+      }).join(' '), " z");
     }
 
     function getAllPointsOnCurvedPolygon(_a) {

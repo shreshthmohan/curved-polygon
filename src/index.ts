@@ -81,17 +81,14 @@ function pointsToDForPath({
   // A draw elleptical arc to point
   // L draw straight line to point
   if (!allPoints.length) return ''
-  return `M ${allPoints[0].join(' ')}
-    ${allPoints
-      .slice(1)
-      .map((p, i) =>
-        i % 2 === 0
-          ? `A ${borderRadius} ${borderRadius} ${alpha} 0 0 ${p.join(' ')}`
-          : `L ${p.join(' ')}`,
-      )
-      .join(' ')}
-    z
-    `
+  return `M ${allPoints[0].join(' ')} ${allPoints
+    .slice(1)
+    .map((p, i) =>
+      i % 2 === 0
+        ? `A ${borderRadius} ${borderRadius} ${alpha} 0 0 ${p.join(' ')}`
+        : `L ${p.join(' ')}`,
+    )
+    .join(' ')} z`
 }
 
 function getAllPointsOnCurvedPolygon({
