@@ -1,5 +1,7 @@
 # curved-polygon: Tiny library for creating polygons with rounded corners in SVG
 
+![curved-poly-demo](https://user-images.githubusercontent.com/5955802/161431592-26629d30-1332-406d-9aa9-86f8614e3be7.gif)
+
 
 ## Installation
 
