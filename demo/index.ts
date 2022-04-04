@@ -1,4 +1,4 @@
-import { roundedPolygonByCircumRadius } from '../src/index'
+import { roundedPolygonByCircumRadius } from 'curved-polygon'
 
 const d1 = roundedPolygonByCircumRadius({
   circumRadius: 80,
