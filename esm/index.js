@@ -5,6 +5,7 @@ export function roundedPolygonBySideLength(_a) {
     var _g = polygonSideToCircleRadius({ sideLength: sideLength, sideCount: sideCount }), r = _g.circumcircleRadius, alpha = _g.angleIntendedBySide;
     // polygon on which the centres of border circles lie
     var radiusOfInnerPolygon = r - borderRadius / Math.cos(alpha / 2);
+    // convert to radians
     rotate = (rotate * PI) / 180;
     var allPoints = getAllPointsOnCurvedPolygon({
         sideCount: sideCount,
@@ -22,6 +23,7 @@ export function roundedPolygonByCircumRadius(_a) {
     var circumRadius = _a.circumRadius, _b = _a.sideCount, sideCount = _b === void 0 ? 3 : _b, _c = _a.borderRadius, borderRadius = _c === void 0 ? 0 : _c, _d = _a.cx, cx = _d === void 0 ? 0 : _d, _e = _a.cy, cy = _e === void 0 ? 0 : _e, _f = _a.rotate, rotate = _f === void 0 ? 0 : _f;
     var alpha = angleIntendedByPolygonSide(sideCount); // in radians
     var radiusOfInnerPolygon = circumRadius - borderRadius / Math.cos(alpha / 2);
+    // convert to radians
     rotate = (rotate * PI) / 180;
     var allPoints = getAllPointsOnCurvedPolygon({
         sideCount: sideCount,
@@ -58,8 +60,12 @@ function getAllPointsOnCurvedPolygon(_a) {
     cx = _b === void 0 ? 0 : _b, _c = _a.cy, cy = _c === void 0 ? 0 : _c, rotate = _a.rotate;
     var allPoints = [];
     for (var i = 0; i < sideCount; i++) {
-        var curveStartPoint = addPolarPointVectorsAndConvertToCartesian([i * alpha + alpha / 2 + rotate, radiusOfInnerPolygon], [i * alpha, borderRadius]);
-        var curveEndPoint = addPolarPointVectorsAndConvertToCartesian([i * alpha + alpha / 2 + rotate, radiusOfInnerPolygon], [(i + 1) * alpha, borderRadius]);
+        var curveStartPoint = addPolarPointVectorsAndConvertToCartesian(
+        // rotation is anti-clockwise, so reversing sign
+        [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon], [i * alpha, borderRadius]);
+        var curveEndPoint = addPolarPointVectorsAndConvertToCartesian(
+        // rotation is anti-clockwise, so reversing sign
+        [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon], [(i + 1) * alpha, borderRadius]);
         allPoints.push(curveStartPoint, curveEndPoint);
     }
     var allShiftedPoints = allPoints.map(function (_a) {
