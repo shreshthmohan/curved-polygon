@@ -1,6 +1,6 @@
 {
   "name": "curved-polygon",
-  "version": "0.1.5",
+  "version": "1.0.0",
   "description": "Generate path string for curved polygons in SVG",
   "main": "./cjs/index.js",
   "scripts": {
