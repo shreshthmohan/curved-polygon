@@ -6,6 +6,7 @@ const d1 = roundedPolygonByCircumRadius({
   rotate: 0,
   cx: 120,
   cy: 150,
+  borderRadius: 10,
 })
 const d2 = roundedPolygonByCircumRadius({
   circumRadius: 80,
@@ -13,6 +14,7 @@ const d2 = roundedPolygonByCircumRadius({
   rotate: 90,
   cx: 300,
   cy: 150,
+  borderRadius: 10,
 })
 
 document.getElementById('polygon1').setAttribute('d', d1)

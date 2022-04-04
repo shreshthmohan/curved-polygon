@@ -126,12 +126,12 @@ function getAllPointsOnCurvedPolygon({
     const curveStartPoint = addPolarPointVectorsAndConvertToCartesian(
       // rotation is anti-clockwise, so reversing sign
       [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon],
-      [i * alpha, borderRadius],
+      [i * alpha - rotate, borderRadius],
     )
     const curveEndPoint = addPolarPointVectorsAndConvertToCartesian(
       // rotation is anti-clockwise, so reversing sign
       [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon],
-      [(i + 1) * alpha, borderRadius],
+      [(i + 1) * alpha - rotate, borderRadius],
     )
     allPoints.push(curveStartPoint, curveEndPoint)
   }

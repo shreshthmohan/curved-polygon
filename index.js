@@ -106,9 +106,9 @@ self.curvedPolygon = (function (exports) {
 
       for (var i = 0; i < sideCount; i++) {
         var curveStartPoint = addPolarPointVectorsAndConvertToCartesian( // rotation is anti-clockwise, so reversing sign
-        [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon], [i * alpha, borderRadius]);
+        [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon], [i * alpha - rotate, borderRadius]);
         var curveEndPoint = addPolarPointVectorsAndConvertToCartesian( // rotation is anti-clockwise, so reversing sign
-        [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon], [(i + 1) * alpha, borderRadius]);
+        [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon], [(i + 1) * alpha - rotate, borderRadius]);
         allPoints.push(curveStartPoint, curveEndPoint);
       }
 
