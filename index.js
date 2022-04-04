@@ -12,22 +12,26 @@ self.curvedPolygon = (function (exports) {
           _d = _a.cx,
           cx = _d === void 0 ? 0 : _d,
           _e = _a.cy,
-          cy = _e === void 0 ? 0 : _e;
+          cy = _e === void 0 ? 0 : _e,
+          _f = _a.rotate,
+          rotate = _f === void 0 ? 0 : _f;
 
-      var _f = polygonSideToCircleRadius({
+      var _g = polygonSideToCircleRadius({
         sideLength: sideLength,
         sideCount: sideCount
       }),
-          r = _f.circumcircleRadius,
-          alpha = _f.angleIntendedBySide; // polygon on which the centres of border circles lie
+          r = _g.circumcircleRadius,
+          alpha = _g.angleIntendedBySide; // polygon on which the centres of border circles lie
 
 
       var radiusOfInnerPolygon = r - borderRadius / Math.cos(alpha / 2);
+      rotate = rotate * PI / 180;
       var allPoints = getAllPointsOnCurvedPolygon({
         sideCount: sideCount,
         radiusOfInnerPolygon: radiusOfInnerPolygon,
         borderRadius: borderRadius,
         alpha: alpha,
+        rotate: rotate,
         cx: cx,
         cy: cy
       });
@@ -47,14 +51,19 @@ self.curvedPolygon = (function (exports) {
           _d = _a.cx,
           cx = _d === void 0 ? 0 : _d,
           _e = _a.cy,
-          cy = _e === void 0 ? 0 : _e;
-      var alpha = angleIntendedByPolygonSide(sideCount);
+          cy = _e === void 0 ? 0 : _e,
+          _f = _a.rotate,
+          rotate = _f === void 0 ? 0 : _f;
+      var alpha = angleIntendedByPolygonSide(sideCount); // in radians
+
       var radiusOfInnerPolygon = circumRadius - borderRadius / Math.cos(alpha / 2);
+      rotate = rotate * PI / 180;
       var allPoints = getAllPointsOnCurvedPolygon({
         sideCount: sideCount,
         radiusOfInnerPolygon: radiusOfInnerPolygon,
         borderRadius: borderRadius,
         alpha: alpha,
+        rotate: rotate,
         cx: cx,
         cy: cy
       });
@@ -84,15 +93,18 @@ self.curvedPolygon = (function (exports) {
           radiusOfInnerPolygon = _a.radiusOfInnerPolygon,
           borderRadius = _a.borderRadius,
           alpha = _a.alpha,
-          _b = _a.cx,
-          cx = _b === void 0 ? 0 : _b,
+          // in radians
+      _b = _a.cx,
+          // in radians
+      cx = _b === void 0 ? 0 : _b,
           _c = _a.cy,
-          cy = _c === void 0 ? 0 : _c;
+          cy = _c === void 0 ? 0 : _c,
+          rotate = _a.rotate;
       var allPoints = [];
 
       for (var i = 0; i < sideCount; i++) {
-        var curveStartPoint = addPolarPointVectorsAndConvertToCartesian([i * alpha + alpha / 2, radiusOfInnerPolygon], [i * alpha, borderRadius]);
-        var curveEndPoint = addPolarPointVectorsAndConvertToCartesian([i * alpha + alpha / 2, radiusOfInnerPolygon], [(i + 1) * alpha, borderRadius]);
+        var curveStartPoint = addPolarPointVectorsAndConvertToCartesian([i * alpha + alpha / 2 + rotate, radiusOfInnerPolygon], [i * alpha, borderRadius]);
+        var curveEndPoint = addPolarPointVectorsAndConvertToCartesian([i * alpha + alpha / 2 + rotate, radiusOfInnerPolygon], [(i + 1) * alpha, borderRadius]);
         allPoints.push(curveStartPoint, curveEndPoint);
       }
 

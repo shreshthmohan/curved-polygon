@@ -1,6 +1,6 @@
 // It's weird to create two types that are identical but have different names
-type PolarPoint = [number, number]
-type CartesianPoint = [number, number]
+type PolarPoint = [number, number] // angle in radians, radius / length of vector
+type CartesianPoint = [number, number] // x, y
 
 const PI = Math.PI
 
@@ -11,12 +11,14 @@ export function roundedPolygonBySideLength({
   borderRadius = 0,
   cx = 0,
   cy = 0,
+  rotate = 0, // angle in degrees
 }: {
   sideLength: number
   sideCount: number
   borderRadius?: number
   cx?: number
   cy?: number
+  rotate?: number
 }): string {
   const { circumcircleRadius: r, angleIntendedBySide: alpha } =
     polygonSideToCircleRadius({ sideLength, sideCount })
@@ -24,11 +26,15 @@ export function roundedPolygonBySideLength({
   // polygon on which the centres of border circles lie
   const radiusOfInnerPolygon = r - borderRadius / Math.cos(alpha / 2)
 
+  // convert to radians
+  rotate = (rotate * PI) / 180
+
   const allPoints = getAllPointsOnCurvedPolygon({
     sideCount,
     radiusOfInnerPolygon,
     borderRadius,
     alpha,
+    rotate,
     cx,
     cy,
   })
@@ -43,22 +49,28 @@ export function roundedPolygonByCircumRadius({
   borderRadius = 0,
   cx = 0,
   cy = 0,
+  rotate = 0,
 }: {
   circumRadius: number
   sideCount: number
   borderRadius?: number
   cx?: number
   cy?: number
+  rotate?: number
 }) {
-  const alpha = angleIntendedByPolygonSide(sideCount)
+  const alpha = angleIntendedByPolygonSide(sideCount) // in radians
 
   const radiusOfInnerPolygon = circumRadius - borderRadius / Math.cos(alpha / 2)
+
+  // convert to radians
+  rotate = (rotate * PI) / 180
 
   const allPoints = getAllPointsOnCurvedPolygon({
     sideCount,
     radiusOfInnerPolygon,
     borderRadius,
     alpha,
+    rotate,
     cx,
     cy,
   })
@@ -95,14 +107,16 @@ function getAllPointsOnCurvedPolygon({
   sideCount,
   radiusOfInnerPolygon,
   borderRadius,
-  alpha,
+  alpha, // in radians
   cx = 0,
   cy = 0,
+  rotate,
 }: {
   sideCount: number
   radiusOfInnerPolygon: number
   borderRadius: number
   alpha: number
+  rotate: number
   cx?: number
   cy?: number
 }): CartesianPoint[] {
@@ -110,11 +124,13 @@ function getAllPointsOnCurvedPolygon({
 
   for (let i = 0; i < sideCount; i++) {
     const curveStartPoint = addPolarPointVectorsAndConvertToCartesian(
-      [i * alpha + alpha / 2, radiusOfInnerPolygon],
+      // rotation is anti-clockwise, so reversing sign
+      [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon],
       [i * alpha, borderRadius],
     )
     const curveEndPoint = addPolarPointVectorsAndConvertToCartesian(
-      [i * alpha + alpha / 2, radiusOfInnerPolygon],
+      // rotation is anti-clockwise, so reversing sign
+      [i * alpha + alpha / 2 - rotate, radiusOfInnerPolygon],
       [(i + 1) * alpha, borderRadius],
     )
     allPoints.push(curveStartPoint, curveEndPoint)
