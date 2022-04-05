@@ -60,7 +60,7 @@ export function roundedPolygonBySideLength({
     circumRadius: r,
     angleIntendedBySide: alpha,
     inRadius,
-  } = polygonSideToCircleRadius({ sideLength, sideCount })
+  } = polygonSidetoCircumRadius({ sideLength, sideCount })
 
   const minSideLength = sideLengthFromInRadius({
     inRadius: borderRadius,
@@ -127,7 +127,45 @@ export function roundedPolygonByCircumRadius({
   cy?: number
   rotate?: number
 }) {
-  const alpha = angleIntendedByPolygonSide(sideCount) // in radians
+  const errors = []
+  const warnings = []
+
+  if (sideCount < 3) {
+    errors.push(
+      'sideCount cannot be smaller than 3. There is no polygon with fewer sides than a triangle. No fun shapes here. :) Sorry!',
+    )
+  }
+
+  if (errors.length) {
+    return { d: '', errors }
+  }
+  const {
+    sideLength,
+    inRadius,
+    angleIntendedBySide: alpha,
+  } = circumRadiusToPolygonSide({
+    sideCount,
+    circumRadius,
+  })
+
+  const minSideLength = sideLengthFromInRadius({
+    inRadius: borderRadius,
+    anglePerSide: alpha,
+  })
+  if (borderRadius > inRadius) {
+    warnings.push(
+      `borderRadius(${borderRadius}) is larger than inradius(${inRadius}) of the polygon. The resulting shape won't really be a polygon.
+      To get a proper curved polygon, either make the border radius smaller than ${inRadius} or make the sideLength larger than ${minSideLength}.
+      Ignore this warning if you intentionally want this curious pattern.
+      `,
+    )
+  }
+
+  if (borderRadius < 0) {
+    warnings.push(
+      'You provided a negative borderRadius. Might produce an unexpected shape that is not a polygon. Ignore this warning if this was intentional.',
+    )
+  }
 
   const radiusOfInnerPolygon = circumRadius - borderRadius / Math.cos(alpha / 2)
 
@@ -145,7 +183,17 @@ export function roundedPolygonByCircumRadius({
   })
 
   const dForPath: string = pointsToDForPath({ allPoints, borderRadius, alpha })
-  return dForPath
+  return {
+    d: dForPath,
+    meta: {
+      circumRadius,
+      inRadius,
+      sideLength,
+      borderRadius,
+      minSideLength,
+    },
+    warnings,
+  }
 }
 
 // returns d attribute used in the SVG <path> element
@@ -216,7 +264,7 @@ function angleIntendedByPolygonSide(sideCount: number): number {
   return (2 * PI) / sideCount
 }
 
-function polygonSideToCircleRadius({
+function polygonSidetoCircumRadius({
   sideLength,
   sideCount,
 }: {
@@ -233,6 +281,21 @@ function polygonSideToCircleRadius({
   const inRadius = sideLength / (2 * Math.tan(angleIntendedBySide / 2))
 
   return { circumRadius, angleIntendedBySide, inRadius }
+}
+
+function circumRadiusToPolygonSide({
+  circumRadius,
+  sideCount,
+}: {
+  circumRadius: number
+  sideCount: number
+}): { sideLength: number; angleIntendedBySide: number; inRadius: number } {
+  const angleIntendedBySide = angleIntendedByPolygonSide(sideCount)
+
+  const sideLength = circumRadius * (2 * Math.sin(angleIntendedBySide / 2))
+
+  const inRadius = sideLength / (2 * Math.tan(angleIntendedBySide / 2))
+  return { sideLength, angleIntendedBySide, inRadius }
 }
 
 // Did not keep it in polar, because the calculation gets complicated

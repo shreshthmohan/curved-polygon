@@ -9,7 +9,7 @@ const d1 = roundedPolygonByCircumRadius({
   rotate: 0,
   cx: 120,
   cy: 150,
-  borderRadius: 10,
+  borderRadius: 15,
 })
 const d2 = roundedPolygonBySideLength({
   sideLength: 130,
@@ -17,10 +17,11 @@ const d2 = roundedPolygonBySideLength({
   rotate: 30,
   cx: 300,
   cy: 150,
-  borderRadius: 10,
+  borderRadius: -17.5,
 })
 
+console.log({ d1 })
 console.log({ d2 })
 
-document.getElementById('polygon1').setAttribute('d', d1)
+document.getElementById('polygon1').setAttribute('d', d1.d)
 document.getElementById('polygon2').setAttribute('d', d2.d)
