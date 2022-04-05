@@ -4,6 +4,19 @@ type CartesianPoint = [number, number] // x, y
 
 const PI = Math.PI
 
+interface PolygonData {
+  d: string
+  errors?: string[]
+  meta?: {
+    inRadius: number
+    sideLength: number
+    circumRadius: number
+    borderRadius: number
+    minSideLength: number
+  }
+  warnings?: string[]
+}
+
 function sideLengthFromInRadius({
   inRadius,
   anglePerSide,
@@ -30,18 +43,7 @@ export function roundedPolygonBySideLength({
   cx?: number
   cy?: number
   rotate?: number
-}): {
-  d: string
-  errors?: string[]
-  meta?: {
-    inRadius: number
-    sideLength: number
-    circumRadius: number
-    borderRadius: number
-    minSideLength: number
-  }
-  warnings?: string[]
-} {
+}): PolygonData {
   const errors = []
   const warnings = []
 
