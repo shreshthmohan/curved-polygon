@@ -712,10 +712,10 @@ css-what@^6.0.1:
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-6.1.0.tgz#fb5effcf76f1ddea2c81bdfaa4de44e79bac70f4"
   integrity sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==
 
-curved-polygon@^0.1.5:
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/curved-polygon/-/curved-polygon-0.1.5.tgz#74dd2b25c94e51d10edf8e8ad36776d41dd90026"
-  integrity sha512-f8epWWBNsEUqKLb9j0xYWEGVuHllNLjiXFM0R4qY/gqPY+/lv9VdwXD2qBRcjDqrkGT+54iCiegttSe+m94a4Q==
+curved-polygon@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/curved-polygon/-/curved-polygon-1.0.0.tgz#714ff04a892e51800457b5358f471c75b235c444"
+  integrity sha512-L1BndpYxJP6IIIsV8aI4h8cKiN1LWrPT8wKfqQm9gLS8UFlkhkJn9R1Z3WG1/u39sUAdHc4hvsMd6uUa2DmZgQ==
 
 debug@2.6.9:
   version "2.6.9"

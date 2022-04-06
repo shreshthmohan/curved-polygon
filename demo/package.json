@@ -16,6 +16,6 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "curved-polygon": "^0.1.5"
+    "curved-polygon": "^1.0.0"
   }
 }
