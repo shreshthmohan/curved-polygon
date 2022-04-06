@@ -1,3 +1,15 @@
+interface PolygonData {
+    d: string;
+    errors?: string[];
+    meta?: {
+        inRadius: number;
+        sideLength: number;
+        circumRadius: number;
+        borderRadius: number;
+        minSideLength: number;
+    };
+    warnings?: string[];
+}
 export declare function roundedPolygonBySideLength({ sideLength, sideCount, borderRadius, cx, cy, rotate, }: {
     sideLength: number;
     sideCount: number;
@@ -5,7 +17,7 @@ export declare function roundedPolygonBySideLength({ sideLength, sideCount, bord
     cx?: number;
     cy?: number;
     rotate?: number;
-}): string;
+}): PolygonData;
 export declare function roundedPolygonByCircumRadius({ circumRadius, sideCount, borderRadius, cx, cy, rotate, }: {
     circumRadius: number;
     sideCount: number;
@@ -13,4 +25,21 @@ export declare function roundedPolygonByCircumRadius({ circumRadius, sideCount, 
     cx?: number;
     cy?: number;
     rotate?: number;
-}): string;
+}): {
+    d: string;
+    errors: string[];
+    meta?: undefined;
+    warnings?: undefined;
+} | {
+    d: string;
+    meta: {
+        circumRadius: number;
+        inRadius: number;
+        sideLength: number;
+        borderRadius: number;
+        minSideLength: number;
+    };
+    warnings: string[];
+    errors?: undefined;
+};
+export {};
