@@ -44,6 +44,15 @@ const pathStringC = roundedPolygonByCircumRadius({
 // set this to the "d" attribute of a <path> SVG element
 ```
 
+### return value
+
+The return value is an **object** with the following properties:
+
+- `d` (string) SVG path string to be used as a value to the `d` attributes of a `<path>` element
+- `meta` (object) contains helpful values: `sideLength`, `circumRadius`, `inRadius`, `minSideLength`, and `borderRadius`
+- `warnings` (an array of strings)
+- `errors` (an array of strings)
+
 ## `roundedPolygonBySideLength(options)`
 
 `options` properties
@@ -71,6 +80,15 @@ const pathStringS = roundedPolygonBySideLength({
 // "M 242.7345747199464 287.63819204711734 A 10 10 1.2566370614359172 0 0 252.24513988289794 280.7283619908668 L 309.55825899209157 104.33671884433718 A 10 10 1.2566370614359172 0 0 305.92554635206477 93.15637895683824 L 155.87785252292474 -15.85965183915954 A 10 10 1.2566370614359172 0 0 144.1221474770753 -15.859651839159568 L -5.9255463520647425 93.1563789568382 A 10 10 1.2566370614359172 0 0 -9.558258992091538 104.33671884433714 L 47.75486011710204 280.7283619908668 A 10 10 1.2566370614359172 0 0 57.26542528005358 287.63819204711734 z"
 // set this to the "d" attribute of a <path> SVG element
 ```
+
+### return value
+
+The return value is an **object** with the following properties:
+
+- `d` (string) SVG path string to be used as a value to the `d` attributes of a `<path>` element
+- `meta` (object) contains helpful values: `sideLength`, `circumRadius`, `inRadius`, `minSideLength`, and `borderRadius`
+- `warnings` (an array of strings)
+- `errors` (an array of strings)
 
 ## Demos
 
