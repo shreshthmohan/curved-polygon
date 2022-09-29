@@ -1,7 +1,7 @@
 {
   "name": "curved-polygon",
-  "version": "1.0.0",
-  "description": "Generate path string for curved polygons in SVG",
+  "version": "1.0.1",
+  "description": "A utility to generate path string for curved polygons in SVG",
   "main": "./cjs/index.js",
   "scripts": {
     "build": "npm run tsc && npm run cjs && npm run rollup:es && npm run rollup:babel && npm run min",
@@ -12,8 +12,13 @@
     "min": "terser index.js --comments='/^!/' -c -m -o min.js",
     "prepare": "npm run build"
   },
-  "keywords": [],
-  "author": "Shreshth Mohan",
+  "keywords": [
+    "svg",
+    "polygon",
+    "curved",
+    "curved-polygon"
+  ],
+  "author": "Shreshth Mohan <sremog@gmail.com> (https://shreshth.dev)",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.17.5",
